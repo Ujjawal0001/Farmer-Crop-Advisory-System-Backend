@@ -159,9 +159,15 @@ const seedDatabase = async () => {
  * Exits process on connection failure.
  */
 const connectDB = async () => {
-  try {
+try {
+    // 👇 Add these lines
+    console.log("MONGO_URI:", process.env.MONGO_URI);
+    console.log("Node Version:", process.version);
+
     const conn = await mongoose.connect(process.env.MONGO_URI);
+
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+
     await seedDatabase();
   } catch (error) {
     console.error(`MongoDB Connection Error: ${error.message}`);
