@@ -448,4 +448,4 @@ function getRecommendations(soilData, weatherData) {
     .slice(0, 6);
 }
 
-module.exports = { getRecommendations };
+module.exports = { getRecommendations, CROPS_DATABASE };

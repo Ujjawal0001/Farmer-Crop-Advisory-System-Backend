@@ -4,6 +4,7 @@
 // ============================================
 const Soil = require('../models/Soil');
 const Recommendation = require('../models/Recommendation');
+const Crop = require('../models/Crop');
 const axios = require('axios');
 const { getRecommendations } = require('../utils/cropAdvisor');
 
@@ -68,7 +69,10 @@ const getRecommendation = async (req, res, next) => {
       season: soil.season
     };
 
-    const crops = getRecommendations(soilData, weatherData);
+    // Fetch crop rules dynamically from database
+    const cropsDatabase = await Crop.find().lean();
+
+    const crops = getRecommendations(soilData, weatherData, cropsDatabase);
 
     // Save recommendation to database
     const recommendation = await Recommendation.create({

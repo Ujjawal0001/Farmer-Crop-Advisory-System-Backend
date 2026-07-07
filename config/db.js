@@ -2,9 +2,19 @@ const mongoose = require('mongoose');
 const User = require('../models/User');
 const Soil = require('../models/Soil');
 const Recommendation = require('../models/Recommendation');
+const Crop = require('../models/Crop');
+const { CROPS_DATABASE } = require('../utils/cropAdvisor');
 
 const seedDatabase = async () => {
   try {
+    // Seed Crops database
+    const cropCount = await Crop.countDocuments();
+    if (cropCount === 0) {
+      console.log('🌱 Seeding crop database...');
+      await Crop.create(CROPS_DATABASE);
+      console.log('✅ Crop database seeded successfully.');
+    }
+
     // Seed Admin users
     const adminCount = await User.countDocuments({ role: 'admin' });
     if (adminCount === 0) {
