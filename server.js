@@ -58,7 +58,12 @@ app.use('/api/chatbot', chatbotRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Farmer Crop Advisory API is running!' });
 });
-
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend is running",
+  });
+});
 // ============================================
 // Error Handler (must be last middleware)
 // ============================================
